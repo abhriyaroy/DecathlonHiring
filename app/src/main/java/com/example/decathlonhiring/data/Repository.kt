@@ -15,6 +15,7 @@ interface Repository {
   fun getNextBall(): Double
   fun updateOverCount(): Double
   fun getRunForDelivery(): Run
+  fun cancelDeliveryDueToNoBall()
 }
 
 const val lowestScorePossible = 30
@@ -23,7 +24,7 @@ const val highestScorePossible = 90
 class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Repository {
 
   private val batsmanStack = Stack<String>()
-  private val bowlersMap = arrayListOf(
+  private val bowlersList = arrayListOf(
     Pair(1, "B1"),
     Pair(2, "B2"),
     Pair(3, "B3"),
@@ -33,6 +34,15 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
   private var previousBowler = -1
   private var runsConceeded = 0
   private var overCount = 0.0
+  private val runsMap = hashMapOf(
+    Pair(ONE, 1),
+    Pair(TWO, 2),
+    Pair(THREE, 3),
+    Pair(FOUR, 4),
+    Pair(SIX, 6),
+    Pair(WICKET, 0),
+    Pair(NO_BALL, 1)
+  )
 
   init {
     batsmanStack.push("P5")
@@ -67,6 +77,8 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
 
   override fun getNextBall(): Double {
     overCount += 0.1
+    val ball = (overCount * 10).toInt()
+    overCount = ball.toFloat() / 10.0
     return overCount
   }
 
@@ -76,7 +88,7 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
   }
 
   override fun getRunForDelivery(): Run {
-    return when (Random().nextInt(6)) {
+    val run = when (Random().nextInt(6)) {
       0 -> ONE
       1 -> TWO
       2 -> THREE
@@ -85,23 +97,30 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
       5 -> WICKET
       else -> NO_BALL
     }
+    runsConceeded += runsMap[run]!!
+    return run
+  }
+
+  override fun cancelDeliveryDueToNoBall() {
+    
   }
 
   private fun getRandomBowler(): String {
-    println(bowlersMap.toString())
+    println(bowlersList.toString())
     var randomValue = 0
-    if (bowlersMap.size != 1) {
-      randomValue = Random().nextInt(bowlersMap.size - 1)
+    if (bowlersList.size != 1) {
+      randomValue = Random().nextInt(bowlersList.size - 1)
     }
-    previousBowler = bowlersMap[randomValue].first
-    val name = bowlersMap[randomValue].second
-    bowlersMap.removeAt(randomValue)
+    previousBowler = bowlersList[randomValue].first
+    val name = bowlersList[randomValue].second
+    bowlersList.removeAt(randomValue)
+    runsConceeded = 0
     return name
   }
 
   private fun getRandomHigherOrderBowler(): String {
     val betterBowlersList = arrayListOf<Triple<Int, Int, String>>()
-    bowlersMap.forEachIndexed { index, pair ->
+    bowlersList.forEachIndexed { index, pair ->
       if (pair.first > previousBowler) {
         betterBowlersList.add(Triple(index, pair.first, pair.second))
       }
@@ -110,13 +129,13 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
       return getRandomBowler()
     } else if (betterBowlersList.size == 1) {
       with(betterBowlersList[0]) {
-        bowlersMap.removeAt(first)
+        bowlersList.removeAt(first)
         previousBowler = second
         return third
       }
     } else {
       with(betterBowlersList[Random().nextInt(betterBowlersList.size - 1)]) {
-        bowlersMap.removeAt(first)
+        bowlersList.removeAt(first)
         previousBowler = second
         return third
       }

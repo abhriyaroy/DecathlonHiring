@@ -1,6 +1,7 @@
 package com.example.decathlonhiring.presenter.game
 
 import com.example.decathlonhiring.data.Repository
+import com.example.decathlonhiring.exceptions.OutOfBatsmenException
 import com.example.decathlonhiring.presenter.game.GameContract.GamePresenter
 import com.example.decathlonhiring.presenter.game.GameContract.GameView
 import com.example.decathlonhiring.ui.MainScheduler
@@ -12,6 +13,7 @@ class GamePresenterImpl(
 
   private var gameView: GameView? = null
   private var targetScore: Int = 0
+  private var currentScore: Int = 0
 
   override fun attachView(view: GameView) {
     gameView = view
@@ -26,16 +28,19 @@ class GamePresenterImpl(
     gameView?.updateTargetScore(targetScore.toString())
     gameView?.updateStrikerName(repository.getNextBatsman())
     gameView?.updateRunnerName(repository.getNextBatsman())
-    gameView?.updateBowlerName(repository.getNextBowler())
     gameView?.updateCurrentDeliveryScore("0")
     gameView?.updateOverCount("0.0")
     gameView?.updateRunsRequired(targetScore.toString())
   }
 
   override fun handleBowlClick() {
-    println(String.format("%.1f", repository.getNextBall()))
-    println(repository.getRunForDelivery())
-    println(repository.getNextBowler())
+    try {
+      val over = repository.getNextBall()
+      val run = repository.getRunForDelivery()
+
+    } catch (e: OutOfBatsmenException){
+      // bowling team has won
+    }
   }
 
 }
