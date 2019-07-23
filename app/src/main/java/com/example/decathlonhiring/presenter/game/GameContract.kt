@@ -12,6 +12,8 @@ interface GameContract {
     fun updateCurrentDeliveryScore(score : String)
     fun updateOverCount(overCount : String)
     fun updateRunsRequired(runsRequired : String)
+    fun showBattingTeamWonMessage()
+    fun showBowlingTeamWonMessage()
   }
 
   interface GamePresenter : BasePresenter<GameView> {

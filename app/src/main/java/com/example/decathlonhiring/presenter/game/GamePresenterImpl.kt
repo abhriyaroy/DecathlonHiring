@@ -40,8 +40,8 @@ class GamePresenterImpl(
   }
 
   override fun handleBowlClick() {
+    val over = repository.getNextBall()
     try {
-      val over = repository.getNextBall()
       val run = repository.getRunForDelivery()
       when (run) {
         ONE -> {
@@ -68,11 +68,10 @@ class GamePresenterImpl(
       }
       requiredRuns = targetScore - currentScore
     } catch (e: OutOfBatsmenException) {
-      // bowling team has won
+      gameView?.showBowlingTeamWonMessage()
     }
-    validateOver()
-    checkIfBowlingTeamHasWon()
     checkIfBattingTeamHasWon()
+    validateOver(over)
   }
 
   private fun interchangeBatsmen() {
@@ -83,16 +82,21 @@ class GamePresenterImpl(
     strikerName = temp
   }
 
-  private fun validateOver() {
-    
+  private fun validateOver(over: Double) {
+    if ((over + 0.4) % 1.0 == 0.0) {
+      if (over + 0.4 == 5.0) {
+        gameView?.showBowlingTeamWonMessage()
+        return
+      }
+      repository.updateOverCount()
+      gameView?.updateBowlerName(repository.getNextBowler())
+    }
   }
 
   private fun checkIfBattingTeamHasWon() {
-
-  }
-
-  private fun checkIfBowlingTeamHasWon() {
-
+    if (requiredRuns <= 0) {
+      gameView?.showBattingTeamWonMessage()
+    }
   }
 
 }
