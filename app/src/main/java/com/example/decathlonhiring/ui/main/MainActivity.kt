@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.Lifecycle
 import com.example.decathlonhiring.R
+import com.example.decathlonhiring.ui.startgame.StartGameFragment
 import com.example.maticnetwork.presenter.main.MainContract
 import com.example.maticnetwork.utils.showToast
 import com.example.maticnetwork.utils.stringRes
@@ -42,10 +43,9 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.MainView {
   }
 
   override fun showStartGameScreen() {
-    /*supportFragmentManager.beginTransaction()
-        .replace(R.id.mainContainerFragment, LandingFragment(), LANDING_FRAGMENT_TAG)
-        .addToBackStack(LANDING_FRAGMENT_TAG)
-        .commit()   */
+    supportFragmentManager.beginTransaction()
+      .replace(R.id.mainContainerFragment, StartGameFragment())
+      .commit()
   }
 
   override fun showExitConfirmation() {
