@@ -1,5 +1,6 @@
 package com.example.decathlonhiring.data
 
+import com.example.decathlonhiring.data.Run.*
 import com.example.decathlonhiring.exceptions.OutOfBatsmenException
 import java.util.*
 
@@ -11,6 +12,9 @@ interface Repository {
   fun getNextBatsman(): String
 
   fun getNextBowler(): String
+  fun getNextBall(): Double
+  fun updateOverCount(): Double
+  fun getRunForDelivery(): Run
 }
 
 const val lowestScorePossible = 30
@@ -63,6 +67,28 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
     return bowlerName
   }
 
+  override fun getNextBall(): Double {
+    overCount += 0.1
+    return overCount
+  }
+
+  override fun updateOverCount(): Double {
+    overCount += 0.4
+    return overCount
+  }
+
+  override fun getRunForDelivery(): Run {
+    return when (Random().nextInt(6)) {
+      0 -> ONE
+      1 -> TWO
+      2 -> THREE
+      3 -> FOUR
+      4 -> SIX
+      5 -> WICKET
+      else -> NO_BALL
+    }
+  }
+
   private fun getRandomHigherOrderBowler(): String {
     val betterBowlersList = arrayListOf<Triple<Int, Int, String>>()
     bowlersMap.forEachIndexed { index, pair ->
@@ -76,4 +102,8 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
       return third
     }
   }
+}
+
+enum class Run {
+  ONE, TWO, THREE, FOUR, SIX, WICKET, NO_BALL
 }
