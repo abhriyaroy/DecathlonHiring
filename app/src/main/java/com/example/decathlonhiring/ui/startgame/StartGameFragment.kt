@@ -2,29 +2,43 @@ package com.example.decathlonhiring.ui.startgame
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.example.decathlonhiring.R
+import com.example.decathlonhiring.presenter.startgame.StartGameContract.StartGamePresenter
+import com.example.decathlonhiring.presenter.startgame.StartGameContract.StartGameView
+import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_start_game.view.*
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class StartGameFragment : Fragment(), StartGameView {
 
-/**
- * A simple [Fragment] subclass.
- *
- */
-class StartGameFragment : Fragment() {
+  @Inject
+  internal lateinit var startGamePresenter: StartGamePresenter
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?): View? {
-    // Inflate the layout for this fragment
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    AndroidSupportInjection.inject(this)
     return inflater.inflate(R.layout.fragment_start_game, container, false)
   }
 
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    initClickListeners(view)
+  }
+
+  override fun showGameScreen() {
+
+  }
+
+  private fun initClickListeners(view: View) {
+    view.startGameButton.setOnClickListener {
+      startGamePresenter.handleStartButtonClick()
+    }
+  }
 
 }
