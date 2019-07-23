@@ -44,38 +44,13 @@ class GamePresenterImpl(
     try {
       val run = repository.getRunForDelivery()
       when (run) {
-        ONE -> {
-          currentScore += 1
-          interchangeBatsmen()
-          gameView?.updateCurrentDeliveryScore("1")
-        }
-        TWO -> {
-          currentScore += 2
-          gameView?.updateCurrentDeliveryScore("2")
-        }
-        THREE -> {
-          currentScore += 3
-          interchangeBatsmen()
-          gameView?.updateCurrentDeliveryScore("3")
-        }
-        FOUR -> {
-          currentScore += 4
-          gameView?.updateCurrentDeliveryScore("4")
-        }
-        SIX -> {
-          currentScore += 6
-          gameView?.updateCurrentDeliveryScore("6")
-        }
-        WICKET -> {
-          strikerName = repository.getNextBatsman()
-          gameView?.updateStrikerName(strikerName)
-          gameView?.updateCurrentDeliveryScore("0")
-        }
-        NO_BALL -> {
-          currentScore += 1
-          repository.cancelDeliveryDueToNoBall()
-          gameView?.updateCurrentDeliveryScore("1")
-        }
+        ONE -> processOneRun()
+        TWO -> processTwoRuns()
+        THREE -> processThreeRuns()
+        FOUR -> processFourRuns()
+        SIX -> processSixRuns()
+        WICKET -> processWicket()
+        NO_BALL -> processNoBall()
       }
       requiredRuns = targetScore - currentScore
     } catch (e: OutOfBatsmenException) {
@@ -105,7 +80,7 @@ class GamePresenterImpl(
         gameView?.showBowlingTeamWonMessage()
         return
       }
-      updatedOver +=0.4
+      updatedOver += 0.4
       repository.updateOverCount()
       gameView?.updateBowlerName(repository.getNextBowler())
     }
@@ -118,4 +93,42 @@ class GamePresenterImpl(
     }
   }
 
+  private fun processOneRun() {
+    currentScore += 1
+    interchangeBatsmen()
+    gameView?.updateCurrentDeliveryScore("1")
+  }
+
+  private fun processTwoRuns() {
+    currentScore += 2
+    gameView?.updateCurrentDeliveryScore("2")
+  }
+
+  private fun processThreeRuns() {
+    currentScore += 3
+    interchangeBatsmen()
+    gameView?.updateCurrentDeliveryScore("3")
+  }
+
+  private fun processFourRuns() {
+    currentScore += 4
+    gameView?.updateCurrentDeliveryScore("4")
+  }
+
+  private fun processSixRuns() {
+    currentScore += 6
+    gameView?.updateCurrentDeliveryScore("6")
+  }
+
+  private fun processWicket() {
+    strikerName = repository.getNextBatsman()
+    gameView?.updateStrikerName(strikerName)
+    gameView?.updateCurrentDeliveryScore("0")
+  }
+
+  private fun processNoBall() {
+    currentScore += 1
+    repository.cancelDeliveryDueToNoBall()
+    gameView?.updateCurrentDeliveryScore("1")
+  }
 }
