@@ -31,6 +31,7 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
     Pair(5, "B5")
   )
   private var previousBowler = -1
+  private var runsConceeded = 0
   private var overCount = 0.0
 
   init {
@@ -56,11 +57,8 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
 
   override fun getNextBowler(): String {
     val bowlerName: String
-    if (previousBowler == -1) {
-      val randomValue = Random().nextInt(bowlersMap.size - 1)
-      bowlerName = bowlersMap[randomValue].second
-      bowlersMap.removeAt(randomValue)
-      previousBowler = randomValue
+    if (previousBowler == -1 || runsConceeded < 10) {
+      bowlerName = getRandomBowler()
     } else {
       bowlerName = getRandomHigherOrderBowler()
     }
@@ -89,6 +87,18 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
     }
   }
 
+  private fun getRandomBowler(): String {
+    println(bowlersMap.toString())
+    var randomValue = 0
+    if (bowlersMap.size != 1) {
+      randomValue = Random().nextInt(bowlersMap.size - 1)
+    }
+    previousBowler = bowlersMap[randomValue].first
+    val name = bowlersMap[randomValue].second
+    bowlersMap.removeAt(randomValue)
+    return name
+  }
+
   private fun getRandomHigherOrderBowler(): String {
     val betterBowlersList = arrayListOf<Triple<Int, Int, String>>()
     bowlersMap.forEachIndexed { index, pair ->
@@ -96,10 +106,20 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
         betterBowlersList.add(Triple(index, pair.first, pair.second))
       }
     }
-    with(betterBowlersList[Random().nextInt(betterBowlersList.size - 1)]) {
-      bowlersMap.removeAt(first)
-      previousBowler = second
-      return third
+    if (betterBowlersList.size == 0) {
+      return getRandomBowler()
+    } else if (betterBowlersList.size == 1) {
+      with(betterBowlersList[0]) {
+        bowlersMap.removeAt(first)
+        previousBowler = second
+        return third
+      }
+    } else {
+      with(betterBowlersList[Random().nextInt(betterBowlersList.size - 1)]) {
+        bowlersMap.removeAt(first)
+        previousBowler = second
+        return third
+      }
     }
   }
 }

@@ -17,7 +17,7 @@ class GameFragment : Fragment(), GameView {
 
   @Inject
   internal lateinit var gamePresenter: GamePresenter
-  private lateinit var fragmentView : View
+  private lateinit var fragmentView: View
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +32,7 @@ class GameFragment : Fragment(), GameView {
     fragmentView = view
     attachClickListeners()
     gamePresenter.attachView(this)
+    gamePresenter.decorateView()
   }
 
   override fun onDestroy() {
@@ -40,34 +41,34 @@ class GameFragment : Fragment(), GameView {
   }
 
   override fun updateTargetScore(score: String) {
-
+    fragmentView.targetTextView.text = score
   }
 
   override fun updateStrikerName(name: String) {
-
-  }
-
-  override fun updateRunsRequired(runsRequired: String) {
-
+    fragmentView.strikerBatsmanTextView.text = name
   }
 
   override fun updateRunnerName(name: String) {
+    fragmentView.runnerBatsmanTextView.text = name
+  }
 
+  override fun updateRunsRequired(runsRequired: String) {
+    fragmentView.requiredRunsTextView.text = runsRequired
   }
 
   override fun updateOverCount(overCount: String) {
-
+    fragmentView.oversTextView.text = overCount
   }
 
   override fun updateCurrentDeliveryScore(score: String) {
-
+    fragmentView.currentBallTextView.text = score
   }
 
   override fun updateBowlerName(name: String) {
 
   }
 
-  private fun attachClickListeners(){
+  private fun attachClickListeners() {
     fragmentView.bowlButton.setOnClickListener {
       gamePresenter.handleBowlClick()
     }

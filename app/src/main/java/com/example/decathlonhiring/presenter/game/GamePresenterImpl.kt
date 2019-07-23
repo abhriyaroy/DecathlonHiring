@@ -33,8 +33,9 @@ class GamePresenterImpl(
   }
 
   override fun handleBowlClick() {
-    println(repository.getNextBall())
-    println()
+    println(String.format("%.1f", repository.getNextBall()))
+    println(repository.getRunForDelivery())
+    println(repository.getNextBowler())
   }
 
 }
