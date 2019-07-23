@@ -1,7 +1,8 @@
-package com.example.decathlonhiring
+package com.example.decathlonhiring.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.decathlonhiring.R
 
 class MainActivity : AppCompatActivity() {
 
