@@ -1,5 +1,7 @@
 package com.example.decathlonhiring.di
 
+import com.example.decathlonhiring.ui.game.GameFragment
+import com.example.decathlonhiring.ui.game.GameModule
 import com.example.decathlonhiring.ui.startgame.StartGameFragment
 import com.example.decathlonhiring.ui.startgame.StartGameModule
 import com.example.maticnetwork.di.scopes.PerFragment
@@ -13,4 +15,9 @@ abstract class FragmentBuilder {
   @PerFragment
   @ContributesAndroidInjector(modules = [(StartGameModule::class)])
   abstract fun contributesStartGameFragment(): StartGameFragment
+
+  @PerFragment
+  @ContributesAndroidInjector(modules = [(GameModule::class)])
+  abstract fun contributesGameFragment(): GameFragment
+
 }
