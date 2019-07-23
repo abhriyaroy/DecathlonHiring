@@ -34,5 +34,5 @@ class GameFragment : Fragment(), GameView {
     gamePresenter.detachView()
     super.onDestroy()
   }
-  
+
 }
