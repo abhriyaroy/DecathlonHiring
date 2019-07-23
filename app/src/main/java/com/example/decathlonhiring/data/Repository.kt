@@ -4,8 +4,13 @@ import com.example.decathlonhiring.data.Run.*
 import com.example.decathlonhiring.exceptions.OutOfBatsmenException
 import java.util.*
 
+/**
+ * Usually I would use RxJava to wrap these return values, however, in this case threading would
+ * just be an overhead for such simple operations rather than improving the performance.
+ *
+ * Thus normal data types have been used.
+ */
 interface Repository {
-  // These return values could have been wrapped in Rx but that would cause unnecessary overhead
   fun getTargetScore(): Int
 
   @Throws(OutOfBatsmenException::class)
@@ -72,6 +77,7 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
     } else {
       bowlerName = getRandomHigherOrderBowler()
     }
+    runsConceeded = 0
     return bowlerName
   }
 
@@ -116,7 +122,6 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
     previousBowler = bowlersList[randomValue].first
     val name = bowlersList[randomValue].second
     bowlersList.removeAt(randomValue)
-    runsConceeded = 0
     return name
   }
 

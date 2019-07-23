@@ -1,6 +1,7 @@
 package com.example.decathlonhiring.ui.game
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -66,6 +67,14 @@ class GameFragment : Fragment(), GameView {
 
   override fun updateBowlerName(name: String) {
     fragmentView.bowlerNameTextView.text = name
+  }
+
+  override fun showBattingTeamWonMessage() {
+    println("bat won")
+  }
+
+  override fun showBowlingTeamWonMessage() {
+    println("ball won")
   }
 
   private fun attachClickListeners() {

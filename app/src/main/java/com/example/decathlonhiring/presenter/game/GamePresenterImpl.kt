@@ -99,14 +99,17 @@ class GamePresenterImpl(
   }
 
   private fun validateOver(over: Double) {
+    var updatedOver = over
     if ((over + 0.4) % 1.0 == 0.0) {
       if (over + 0.4 == 5.0) {
         gameView?.showBowlingTeamWonMessage()
         return
       }
+      updatedOver +=0.4
       repository.updateOverCount()
       gameView?.updateBowlerName(repository.getNextBowler())
     }
+    gameView?.updateOverCount(updatedOver.toString())
   }
 
   private fun checkIfBattingTeamHasWon() {
