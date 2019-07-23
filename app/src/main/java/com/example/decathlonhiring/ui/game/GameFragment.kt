@@ -65,7 +65,7 @@ class GameFragment : Fragment(), GameView {
   }
 
   override fun updateBowlerName(name: String) {
-
+    fragmentView.bowlerNameTextView.text = name
   }
 
   private fun attachClickListeners() {
