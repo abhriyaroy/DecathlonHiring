@@ -20,4 +20,11 @@ class GamePresenterImpl(
     gameView = null
   }
 
+  override fun decorateView() {
+    gameView?.updateTargetScore(repository.getTargetScore().toString())
+    gameView?.updateStrikerName(repository.getNextBatsman())
+    gameView?.updateRunnerName(repository.getNextBatsman())
+    gameView?.updateBowlerName(repository..toString())
+  }
+
 }
