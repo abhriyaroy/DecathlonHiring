@@ -76,8 +76,8 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
   }
 
   override fun getNextBall(): Double {
-    overCount += 0.1
-    val ball = (overCount * 10).toInt()
+    var ball = (overCount * 10).toInt()
+    ball += 1
     overCount = ball.toFloat() / 10.0
     return overCount
   }
@@ -102,7 +102,9 @@ class RepositoryImpl(private val backgroundScheduler: BackgroundScheduler) : Rep
   }
 
   override fun cancelDeliveryDueToNoBall() {
-    
+    var ball = (overCount * 10).toInt()
+    ball -= 1
+    overCount = ball.toFloat() / 10.0
   }
 
   private fun getRandomBowler(): String {

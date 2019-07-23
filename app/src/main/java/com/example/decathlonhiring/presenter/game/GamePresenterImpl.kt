@@ -1,6 +1,7 @@
 package com.example.decathlonhiring.presenter.game
 
 import com.example.decathlonhiring.data.Repository
+import com.example.decathlonhiring.data.Run.ONE
 import com.example.decathlonhiring.exceptions.OutOfBatsmenException
 import com.example.decathlonhiring.presenter.game.GameContract.GamePresenter
 import com.example.decathlonhiring.presenter.game.GameContract.GameView
@@ -14,6 +15,9 @@ class GamePresenterImpl(
   private var gameView: GameView? = null
   private var targetScore: Int = 0
   private var currentScore: Int = 0
+  private var requiredRuns: Int = 0
+  private var strikerName = ""
+  private var runnerName = ""
 
   override fun attachView(view: GameView) {
     gameView = view
@@ -24,10 +28,12 @@ class GamePresenterImpl(
   }
 
   override fun decorateView() {
+    strikerName = repository.getNextBatsman()
+    runnerName = repository.getNextBatsman()
     targetScore = repository.getTargetScore()
     gameView?.updateTargetScore(targetScore.toString())
-    gameView?.updateStrikerName(repository.getNextBatsman())
-    gameView?.updateRunnerName(repository.getNextBatsman())
+    gameView?.updateStrikerName(strikerName)
+    gameView?.updateRunnerName(runnerName)
     gameView?.updateCurrentDeliveryScore("0")
     gameView?.updateOverCount("0.0")
     gameView?.updateRunsRequired(targetScore.toString())
@@ -37,10 +43,26 @@ class GamePresenterImpl(
     try {
       val over = repository.getNextBall()
       val run = repository.getRunForDelivery()
-
-    } catch (e: OutOfBatsmenException){
+      when (run) {
+        ONE -> {
+          currentScore += 1
+          gameView?.updateStrikerName()
+        }
+      }
+      requiredRuns = targetScore - currentScore
+    } catch (e: OutOfBatsmenException) {
       // bowling team has won
     }
+    checkIfBowlingTeamHasWon()
+    checkIfBattingTeamHasWon()
+  }
+
+  private fun checkIfBattingTeamHasWon{
+
+  }
+
+  private fun checkIfBowlingTeamHasWon{
+
   }
 
 }
