@@ -9,7 +9,7 @@ import dagger.Provides
 @Module
 class AppModule {
 
-    @PerApplication
-    @Provides
-    fun providesContext(application: Application): Context = application
+  @PerApplication
+  @Provides
+  fun providesContext(application: Application): Context = application
 }

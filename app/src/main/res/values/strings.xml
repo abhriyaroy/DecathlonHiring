@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DecathlonHiring</string>
+    <string name="main_activity_exit_confirmation_message">Press back again to exit game</string>
 </resources>

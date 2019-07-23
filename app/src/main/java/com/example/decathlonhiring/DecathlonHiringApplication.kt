@@ -9,17 +9,17 @@ import javax.inject.Inject
 
 class DecathlonHiringApplication : Application(), HasActivityInjector {
 
-    @Inject
-    internal lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+  @Inject
+  internal lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
-    override fun onCreate() {
-        super.onCreate()
-        DaggerAppComponent.builder()
-            .application(this)
-            .build()
-            .inject(this)
-    }
+  override fun onCreate() {
+    super.onCreate()
+    DaggerAppComponent.builder()
+      .application(this)
+      .build()
+      .inject(this)
+  }
 
-    override fun activityInjector() = activityDispatchingAndroidInjector
+  override fun activityInjector() = activityDispatchingAndroidInjector
 
 }
