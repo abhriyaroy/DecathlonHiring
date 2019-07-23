@@ -47,29 +47,41 @@ class GamePresenterImpl(
         ONE -> {
           currentScore += 1
           interchangeBatsmen()
+          gameView?.updateCurrentDeliveryScore("1")
         }
-        TWO -> currentScore += 2
+        TWO -> {
+          currentScore += 2
+          gameView?.updateCurrentDeliveryScore("2")
+        }
         THREE -> {
           currentScore += 3
           interchangeBatsmen()
+          gameView?.updateCurrentDeliveryScore("3")
         }
         FOUR -> {
           currentScore += 4
+          gameView?.updateCurrentDeliveryScore("4")
         }
-        SIX -> currentScore += 6
+        SIX -> {
+          currentScore += 6
+          gameView?.updateCurrentDeliveryScore("6")
+        }
         WICKET -> {
           strikerName = repository.getNextBatsman()
           gameView?.updateStrikerName(strikerName)
+          gameView?.updateCurrentDeliveryScore("0")
         }
         NO_BALL -> {
           currentScore += 1
           repository.cancelDeliveryDueToNoBall()
+          gameView?.updateCurrentDeliveryScore("1")
         }
       }
       requiredRuns = targetScore - currentScore
     } catch (e: OutOfBatsmenException) {
       gameView?.showBowlingTeamWonMessage()
     }
+    updateView()
     checkIfBattingTeamHasWon()
     validateOver(over)
   }
@@ -80,6 +92,10 @@ class GamePresenterImpl(
     val temp = runnerName
     runnerName = strikerName
     strikerName = temp
+  }
+
+  private fun updateView() {
+    gameView?.updateRunsRequired(requiredRuns.toString())
   }
 
   private fun validateOver(over: Double) {
