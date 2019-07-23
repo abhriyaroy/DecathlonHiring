@@ -37,7 +37,7 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.MainView {
 
   override fun showStartGameScreen() {
     supportFragmentManager.beginTransaction()
-      .replace(R.id.mainContainerFragment, StartGameFragment())
+      .replace(R.id.mainContainer, StartGameFragment())
       .commit()
   }
 

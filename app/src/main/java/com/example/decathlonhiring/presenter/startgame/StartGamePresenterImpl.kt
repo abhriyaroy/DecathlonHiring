@@ -16,6 +16,7 @@ class StartGamePresenterImpl : StartGamePresenter {
   }
 
   override fun handleStartButtonClick() {
+    startGameView?.showAllTheBestMessage()
     startGameView?.showGameScreen()
   }
 
