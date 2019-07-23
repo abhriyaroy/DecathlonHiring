@@ -11,6 +11,7 @@ class GamePresenterImpl(
 ) : GamePresenter {
 
   private var gameView: GameView? = null
+  private var targetScore: Int = 0
 
   override fun attachView(view: GameView) {
     gameView = view
@@ -21,10 +22,19 @@ class GamePresenterImpl(
   }
 
   override fun decorateView() {
-    gameView?.updateTargetScore(repository.getTargetScore().toString())
+    targetScore = repository.getTargetScore()
+    gameView?.updateTargetScore(targetScore.toString())
     gameView?.updateStrikerName(repository.getNextBatsman())
     gameView?.updateRunnerName(repository.getNextBatsman())
-    gameView?.updateBowlerName(repository..toString())
+    gameView?.updateBowlerName(repository.getNextBowler())
+    gameView?.updateCurrentDeliveryScore("0")
+    gameView?.updateOverCount("0.0")
+    gameView?.updateRunsRequired(targetScore.toString())
+  }
+
+  override fun handleBowlClick() {
+    println(repository.getNextBall())
+    println()
   }
 
 }
