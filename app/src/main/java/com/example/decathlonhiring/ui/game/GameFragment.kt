@@ -69,12 +69,22 @@ class GameFragment : Fragment(), GameView {
     fragmentView.bowlerNameTextView.text = name
   }
 
-  override fun showBattingTeamWonMessage() {
-    println("bat won")
+  override fun showBattingTeamWonMessage(wickets: String) {
+    with(AlertDialog.Builder(activity)) {
+      setCancelable(false)
+      setTitle("Match Result")
+      setMessage("Batting team won the match with $wickets remaining.")
+      show()
+    }
   }
 
-  override fun showBowlingTeamWonMessage() {
-    println("ball won")
+  override fun showBowlingTeamWonMessage(runs: String) {
+    with(AlertDialog.Builder(activity)) {
+      setCancelable(false)
+      setTitle("Match Result")
+      setMessage("Bowling team won the match by $runs.")
+      show()
+    }
   }
 
   private fun attachClickListeners() {

@@ -9,11 +9,11 @@ interface GameContract {
     fun updateStrikerName(name: String)
     fun updateRunnerName(name: String)
     fun updateBowlerName(name: String)
-    fun updateCurrentDeliveryScore(score : String)
-    fun updateOverCount(overCount : String)
-    fun updateRunsRequired(runsRequired : String)
-    fun showBattingTeamWonMessage()
-    fun showBowlingTeamWonMessage()
+    fun updateCurrentDeliveryScore(score: String)
+    fun updateOverCount(overCount: String)
+    fun updateRunsRequired(runsRequired: String)
+    fun showBattingTeamWonMessage(wickets: String)
+    fun showBowlingTeamWonMessage(runs: String)
   }
 
   interface GamePresenter : BasePresenter<GameView> {
