@@ -1,7 +1,7 @@
 package com.example.decathlonhiring.presenter.game
 
 import com.example.decathlonhiring.data.Repository
-import com.example.decathlonhiring.data.Run.ONE
+import com.example.decathlonhiring.data.Run.*
 import com.example.decathlonhiring.exceptions.OutOfBatsmenException
 import com.example.decathlonhiring.presenter.game.GameContract.GamePresenter
 import com.example.decathlonhiring.presenter.game.GameContract.GameView
@@ -46,22 +46,52 @@ class GamePresenterImpl(
       when (run) {
         ONE -> {
           currentScore += 1
-          gameView?.updateStrikerName()
+          interchangeBatsmen()
+        }
+        TWO -> currentScore += 2
+        THREE -> {
+          currentScore += 3
+          interchangeBatsmen()
+        }
+        FOUR -> {
+          currentScore += 4
+        }
+        SIX -> currentScore += 6
+        WICKET -> {
+          strikerName = repository.getNextBatsman()
+          gameView?.updateStrikerName(strikerName)
+        }
+        NO_BALL -> {
+          currentScore += 1
+          repository.cancelDeliveryDueToNoBall()
         }
       }
       requiredRuns = targetScore - currentScore
     } catch (e: OutOfBatsmenException) {
       // bowling team has won
     }
+    validateOver()
     checkIfBowlingTeamHasWon()
     checkIfBattingTeamHasWon()
   }
 
-  private fun checkIfBattingTeamHasWon{
+  private fun interchangeBatsmen() {
+    gameView?.updateStrikerName(runnerName)
+    gameView?.updateRunnerName(strikerName)
+    val temp = runnerName
+    runnerName = strikerName
+    strikerName = temp
+  }
+
+  private fun validateOver() {
+    
+  }
+
+  private fun checkIfBattingTeamHasWon() {
 
   }
 
-  private fun checkIfBowlingTeamHasWon{
+  private fun checkIfBowlingTeamHasWon() {
 
   }
 
