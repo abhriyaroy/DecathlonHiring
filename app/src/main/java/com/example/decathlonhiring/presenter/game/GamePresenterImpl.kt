@@ -50,6 +50,18 @@ class GamePresenterImpl(
     validateOver(over)
   }
 
+  private fun processRun(run: Run) {
+    if (run == ONE || run == THREE) {
+      interchangeBatsmen()
+    } else if (run == WICKET) {
+      gameView?.updateWickets(repository.getWicketsLost())
+      strikerName = repository.getNextBatsman()
+      gameView?.updateStrikerName(strikerName)
+    } else if (run == NO_BALL) {
+      repository.cancelDeliveryDueToNoBall()
+    }
+  }
+
   private fun updateView() {
     gameView?.updateScore(repository.getCurrentScore())
     gameView?.updateRunsRequired(repository.getRequiredRunsToWin().toString())
@@ -73,19 +85,6 @@ class GamePresenterImpl(
   private fun checkIfBattingTeamHasWon() {
     if (repository.getCurrentDeliveryScore() <= 0) {
       gameView?.showBattingTeamWonMessage(getBattingTeamWinningMessage())
-    }
-  }
-
-  private fun processRun(run: Run) {
-    if (run == ONE || run == THREE) {
-      interchangeBatsmen()
-    } else if (run == WICKET) {
-      val wicketsLost = 5 - (repository.getRemainingBatsmenCount() + 1)
-      gameView?.updateWickets(wicketsLost)
-      strikerName = repository.getNextBatsman()
-      gameView?.updateStrikerName(strikerName)
-    } else if (run == NO_BALL) {
-      repository.cancelDeliveryDueToNoBall()
     }
   }
 

@@ -25,12 +25,12 @@ interface Repository {
   fun updateOverCount(): Double
   fun getRunForDelivery(): Run
   fun cancelDeliveryDueToNoBall()
-  fun getRunValue(run: Run): Int
   fun getRemainingBatsmenCount(): Int
   fun getRemainingBallsInCurrentOverCount(): Double
   fun getRemainingOversCount(): Int
   fun incrementBatsmanScore(player: String, runs: Int)
   fun getBatsmanScore(player: String): Int
+  fun getWicketsLost(): Int
 }
 
 const val lowestScorePossible = 30
@@ -91,7 +91,8 @@ class RepositoryImpl : Repository {
   }
 
   override fun getRequiredRunsToWin(): Int {
-    return targetScore - currentScore
+    requiredRuns = targetScore - currentScore
+    return requiredRuns
   }
 
   @Throws(OutOfBatsmenException::class)
@@ -138,6 +139,7 @@ class RepositoryImpl : Repository {
     }
     currentDeliveryScore = runsMap[run]!!
     runsConceeded += currentDeliveryScore
+    currentScore += currentDeliveryScore
     return run
   }
 
@@ -145,11 +147,6 @@ class RepositoryImpl : Repository {
     var ball = (overCount * 10).toInt()
     ball -= 1
     overCount = ball.toFloat() / 10.0
-  }
-
-  override fun getRunValue(run: Run): Int {
-    currentDeliveryScore = runsMap[run]!!
-    return currentScore
   }
 
   override fun getRemainingBatsmenCount(): Int {
@@ -178,6 +175,10 @@ class RepositoryImpl : Repository {
     } else {
       return 0
     }
+  }
+
+  override fun getWicketsLost(): Int {
+    return 5 - (batsmanStack.size + 1)
   }
 
   private fun getRandomBowler(): String {
