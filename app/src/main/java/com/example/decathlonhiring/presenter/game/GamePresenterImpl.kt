@@ -46,8 +46,8 @@ class GamePresenterImpl(
     gameView?.updateRunsRequired(repository.getTargetScore().toString())
     gameView?.updateBowlerName(repository.getNextBowler())
     gameView?.updateWickets(INITIAL_WICKETS_LOST)
-    gameView?.updateStrikerScore("$strikerName ($INITIAL_OVER_COUNT)*")
-    gameView?.updateRunnerScore("$runnerName ($INITIAL_OVER_COUNT)")
+    gameView?.updateStrikerScore("$strikerName ($INITIAL_SCORE)*")
+    gameView?.updateRunnerScore("$runnerName ($INITIAL_SCORE)")
     gameView?.updateWickets(INITIAL_WICKETS_LOST)
   }
 

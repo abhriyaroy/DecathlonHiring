@@ -83,7 +83,7 @@
 
   <TextView
     android:id="@+id/strikerScoreTextView"
-    android:layout_width="wrap_content"
+    android:layout_width="@dimen/game_fragment_striker_score_text_width"
     android:layout_height="wrap_content"
     android:layout_marginRight="@dimen/game_fragment_striker_score_text_margin_right"
     android:layout_marginTop="@dimen/game_fragment_striker_score_text_margin_top"
