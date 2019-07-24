@@ -20,6 +20,8 @@ interface GameContract {
     fun updateStrikerScore(score : String)
     fun updateRunnerScore(score: String)
     fun showHalfCenturyAnimation(message : String)
+    fun showWicketMessage()
+    fun showNoBallToast()
   }
 
   interface GamePresenter : BasePresenter<GameView> {

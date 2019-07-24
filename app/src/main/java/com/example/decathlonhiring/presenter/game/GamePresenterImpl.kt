@@ -70,11 +70,13 @@ class GamePresenterImpl(
       gameView?.animateBatsmen()
       interchangeBatsmen()
     } else if (run == WICKET) {
+      gameView?.showWicketMessage()
       gameView?.updateWickets(repository.getWicketsLost())
       strikerName = repository.getNextBatsman()
       gameView?.updateStrikerName(strikerName)
     } else if (run == NO_BALL) {
       repository.cancelDeliveryDueToNoBall()
+      gameView?.showNoBallToast()
     }
   }
 

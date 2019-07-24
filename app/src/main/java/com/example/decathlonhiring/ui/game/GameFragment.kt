@@ -13,6 +13,7 @@ import com.example.decathlonhiring.R
 import com.example.decathlonhiring.presenter.game.GameContract.GamePresenter
 import com.example.decathlonhiring.presenter.game.GameContract.GameView
 import com.example.decathlonhiring.utils.AnimationUtil
+import com.example.decathlonhiring.utils.showToast
 import com.example.decathlonhiring.utils.stringRes
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_game.view.*
@@ -91,7 +92,7 @@ class GameFragment : Fragment(), GameView {
 
   override fun updateWickets(wicketsLost: Int) {
     fragmentView.wicketsTextView.text =
-      activity!!.stringRes(R.string.game_fragment_bowler_name_textView_message, wicketsLost)
+      activity!!.stringRes(R.string.game_fragment_wickets_lost_textView_message, wicketsLost)
   }
 
   override fun showBattingTeamWonMessage(wickets: String) {
@@ -125,6 +126,14 @@ class GameFragment : Fragment(), GameView {
       text = message
       AnimationUtil.showSlideUpAndFadeOutAnimation(activity, this)
     }
+  }
+
+  override fun showWicketMessage() {
+    context?.showToast(context!!.stringRes(R.string.game_fragment_fall_of_wicket_message))
+  }
+
+  override fun showNoBallToast() {
+    context?.showToast(context!!.stringRes(R.string.game_fragment_no_ball_message))
   }
 
   private fun attachClickListeners() {

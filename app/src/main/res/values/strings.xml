@@ -18,4 +18,6 @@
   <string name="game_fragment_bowler_name_textView_message">Bowler: %1$s</string>
   <string name="game_fragment_wickets_lost_textView_message">Wickets Lost: %1$s</string>
   <string name="game_fragment_match_result_dialog_title">Match Result</string>
+  <string name="game_fragment_fall_of_wicket_message">Fall of Wicket</string>
+  <string name="game_fragment_no_ball_message">No Ball</string>
 </resources>
