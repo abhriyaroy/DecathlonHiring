@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.example.decathlonhiring.R
 import com.example.decathlonhiring.presenter.game.GameContract.GamePresenter
 import com.example.decathlonhiring.presenter.game.GameContract.GameView
+import com.example.decathlonhiring.utils.AnimationUtil
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_game.view.*
 import javax.inject.Inject
@@ -109,8 +110,11 @@ class GameFragment : Fragment(), GameView {
     fragmentView.runnerScoreTextView.text = score
   }
 
-  override fun showHalfCenturyAnimation(batsmanName: String) {
-
+  override fun showHalfCenturyAnimation(message: String) {
+    with(fragmentView.halfCenturyCelebrationTextView) {
+      text = message
+      AnimationUtil.showSlideUpAndFadeOutAnimation(activity, this)
+    }
   }
 
   private fun attachClickListeners() {

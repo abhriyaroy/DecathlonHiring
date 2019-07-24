@@ -39,6 +39,7 @@ class GamePresenterImpl(
     gameView?.updateStrikerScore("$strikerName (0)*")
     gameView?.updateRunnerScore("$runnerName (0)")
     gameView?.updateWickets(0)
+    gameView?.showHalfCenturyAnimation("$strikerName (50)*")
   }
 
   override fun handleBowlClick() {
@@ -72,7 +73,7 @@ class GamePresenterImpl(
     gameView?.updateScore(repository.getCurrentScore())
     gameView?.updateRunsRequired(repository.getRequiredRunsToWin().toString())
     with(repository.getBatsmanScore(strikerName)) {
-      if (this >= 50 && !celebrationsSet.contains(strikerName)) {
+      if (this >= 50 && !celebrationsSet.contains("$strikerName (50)*")) {
         celebrationsSet.add(strikerName)
         gameView?.showHalfCenturyAnimation(strikerName)
       }
@@ -81,7 +82,7 @@ class GamePresenterImpl(
     with(repository.getBatsmanScore(runnerName)) {
       if (this >= 50 && !celebrationsSet.contains(runnerName)) {
         celebrationsSet.add(runnerName)
-        gameView?.showHalfCenturyAnimation(runnerName)
+        gameView?.showHalfCenturyAnimation("$runnerName (50)*")
       }
       gameView?.updateRunnerScore("$runnerName ($this)")
     }
