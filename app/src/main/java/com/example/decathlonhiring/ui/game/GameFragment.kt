@@ -18,6 +18,8 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_game.view.*
 import javax.inject.Inject
 
+private const val INITIAL_PROGRESS_VALUE = 0.0f
+
 class GameFragment : Fragment(), GameView {
 
   @Inject
@@ -136,7 +138,7 @@ class GameFragment : Fragment(), GameView {
         }
 
         override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-          fragmentView.motionContainer.progress = 0.0f
+          fragmentView.motionContainer.progress = INITIAL_PROGRESS_VALUE
         }
       }
     )

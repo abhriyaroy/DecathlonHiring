@@ -35,6 +35,10 @@ interface Repository {
 
 const val lowestScorePossible = 30
 const val highestScorePossible = 90
+private const val BOWLING_NOT_OPENED_STATE = -1
+private const val OVER_COUNT_HELPER = 0.4
+private const val NUMBER_OF_BALLS_IN_AN_OVER = 0.6
+private const val MAXIMUM_NUMBER_OF_OVERS = 5
 
 class RepositoryImpl : Repository {
 
@@ -105,7 +109,7 @@ class RepositoryImpl : Repository {
 
   override fun getNextBowler(): String {
     val bowlerName: String
-    if (previousBowler == -1 || runsConceeded < 10) {
+    if (previousBowler == BOWLING_NOT_OPENED_STATE || runsConceeded < 10) {
       bowlerName = getRandomBowler()
     } else {
       bowlerName = getRandomHigherOrderBowler()
@@ -122,7 +126,7 @@ class RepositoryImpl : Repository {
   }
 
   override fun updateOverCount(): Double {
-    overCount += 0.4
+    overCount += OVER_COUNT_HELPER
     return overCount
   }
 
@@ -153,11 +157,11 @@ class RepositoryImpl : Repository {
   }
 
   override fun getRemainingBallsInCurrentOverCount(): Double {
-    return 0.6 - overCount % 1.0
+    return NUMBER_OF_BALLS_IN_AN_OVER - overCount % 1.0
   }
 
   override fun getRemainingOversCount(): Int {
-    return (5 - overCount).toInt()
+    return (MAXIMUM_NUMBER_OF_OVERS - overCount).toInt()
   }
 
   override fun incrementBatsmanScore(player: String, runs: Run) {
@@ -177,7 +181,7 @@ class RepositoryImpl : Repository {
   }
 
   override fun getWicketsLost(): Int {
-    return 5 - (batsmanStack.size + 1)
+    return MAXIMUM_NUMBER_OF_OVERS - (batsmanStack.size + 1)
   }
 
   private fun getRandomBowler(): String {
