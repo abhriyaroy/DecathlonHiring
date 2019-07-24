@@ -5,6 +5,8 @@ import android.content.Context
 import com.example.decathlonhiring.data.Repository
 import com.example.decathlonhiring.data.RepositoryImpl
 import com.example.decathlonhiring.di.scopes.PerApplication
+import com.example.decathlonhiring.utils.ResourceHelper
+import com.example.decathlonhiring.utils.ResourceHelperImpl
 import dagger.Module
 import dagger.Provides
 
@@ -18,4 +20,8 @@ class AppModule {
   @PerApplication
   @Provides
   fun providesRepository(): Repository = RepositoryImpl()
+
+  @PerApplication
+  @Provides
+  fun providesResourceHelper(context: Context): ResourceHelper = ResourceHelperImpl(context)
 }
