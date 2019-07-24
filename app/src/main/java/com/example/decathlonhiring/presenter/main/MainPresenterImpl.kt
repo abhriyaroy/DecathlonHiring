@@ -6,7 +6,7 @@ import com.example.decathlonhiring.presenter.main.MainContract.MainView
 class MainPresenterImpl : MainPresenter {
   private var mainView: MainView? = null
 
-  private var isExitConfirmationShown = false
+  internal var isExitConfirmationShown = false
 
   override fun attachView(view: MainView) {
     mainView = view
