@@ -83,7 +83,7 @@ class GamePresenterImpl(
   }
 
   private fun checkIfBattingTeamHasWon() {
-    if (repository.getCurrentDeliveryScore() <= 0) {
+    if (repository.getRequiredRunsToWin() <= 0) {
       gameView?.showBattingTeamWonMessage(getBattingTeamWinningMessage())
     }
   }
