@@ -12,3 +12,7 @@ fun Context.showToast(message: String, duration: Int = LENGTH_LONG) {
 fun Context.stringRes(@StringRes stringResource: Int): String {
   return getString(stringResource)
 }
+
+fun Context.stringRes(@StringRes stringResource: Int, argument: Int): String {
+  return getString(stringResource, argument)
+}

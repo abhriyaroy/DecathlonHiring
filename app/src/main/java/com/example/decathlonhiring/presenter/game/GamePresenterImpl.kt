@@ -6,6 +6,7 @@ import com.example.decathlonhiring.data.Run.*
 import com.example.decathlonhiring.exceptions.OutOfBatsmenException
 import com.example.decathlonhiring.presenter.game.GameContract.GamePresenter
 import com.example.decathlonhiring.presenter.game.GameContract.GameView
+import com.example.decathlonhiring.utils.ResourceHelper
 
 private const val INITIAL_SCORE = 0
 private const val INITIAL_OVER_COUNT = 0.0F
@@ -15,7 +16,8 @@ private const val OVER_COUNT_HELPER = 0.4
 private const val ONE_OVER_COUNT = 1.0
 
 class GamePresenterImpl(
-  private val repository: Repository
+  private val repository: Repository,
+  private val resourceHelper: ResourceHelper
 ) : GamePresenter {
 
   private var gameView: GameView? = null
