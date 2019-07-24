@@ -1,5 +1,6 @@
 package com.example.decathlonhiring.presenter.game
 
+import com.example.decathlonhiring.R
 import com.example.decathlonhiring.data.Repository
 import com.example.decathlonhiring.data.Run
 import com.example.decathlonhiring.data.Run.*
@@ -128,14 +129,23 @@ class GamePresenterImpl(
   private fun getBowlingTeamWinningMessage(): String {
     val remainingRuns = repository.getRequiredRunsToWin()
     if (remainingRuns > 1) {
-      return "Bowling team win by $remainingRuns runs"
+      return resourceHelper.getStringResource(
+        R.string.game_fragment_bowling_team_wins_by_more_than_one_run_message,
+        remainingRuns
+      )
     } else {
-      return "Bowling team win by $remainingRuns run"
+      return resourceHelper.getStringResource(
+        R.string.game_fragment_bowling_team_wins_by_more_than_one_run_message,
+        remainingRuns
+      )
     }
   }
 
   private fun getBattingTeamWinningMessage(): String {
     val playersLeft = repository.getRemainingBatsmenCount() + 1
-    return "Batting team win by ${playersLeft + 1} wickets"
+    return resourceHelper.getStringResource(
+      R.string.game_fragment_batting_team_wins_message,
+      playersLeft + 1
+    )
   }
 }

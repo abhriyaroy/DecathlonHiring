@@ -7,4 +7,7 @@
   <string name="start_game_fragment_all_the_best_message">All the best!</string>
 
   <string name="game_fragment_bowl_button_text">BOWL</string>
+  <string name="game_fragment_bowling_team_wins_by_one_run_message">Bowling team wins by %1$d run</string>
+  <string name="game_fragment_bowling_team_wins_by_more_than_one_run_message">Bowling team wins by %1$d runs</string>
+  <string name="game_fragment_batting_team_wins_message">Batting team wins by %1$d wickets</string>
 </resources>
