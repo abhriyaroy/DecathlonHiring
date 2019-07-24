@@ -16,6 +16,9 @@ interface GameContract {
     fun updateWickets(wicketsLost: Int)
     fun showBattingTeamWonMessage(wickets: String)
     fun showBowlingTeamWonMessage(runs: String)
+    fun updateStrikerScore(score : String)
+    fun updateRunnerScore(score: String)
+    fun showHalfCenturyAnimation(batsmanName : String)
   }
 
   interface GamePresenter : BasePresenter<GameView> {

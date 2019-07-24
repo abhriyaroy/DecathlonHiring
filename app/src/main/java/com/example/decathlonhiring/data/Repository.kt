@@ -28,7 +28,7 @@ interface Repository {
   fun getRemainingBatsmenCount(): Int
   fun getRemainingBallsInCurrentOverCount(): Double
   fun getRemainingOversCount(): Int
-  fun incrementBatsmanScore(player: String, runs: Int)
+  fun incrementBatsmanScore(player: String, runs: Run)
   fun getBatsmanScore(player: String): Int
   fun getWicketsLost(): Int
 }
@@ -62,7 +62,6 @@ class RepositoryImpl : Repository {
     Pair(WICKET, 0),
     Pair(NO_BALL, 1)
   )
-  private var wicketsLost = 0
   private val batsmanScoreMap = hashMapOf<String, Int>()
 
   init {
@@ -161,11 +160,11 @@ class RepositoryImpl : Repository {
     return (5 - overCount).toInt()
   }
 
-  override fun incrementBatsmanScore(player: String, runs: Int) {
+  override fun incrementBatsmanScore(player: String, runs: Run) {
     if (batsmanScoreMap.containsKey(player)) {
-      batsmanScoreMap[player] = batsmanScoreMap[player]!!.plus(runs)
+      batsmanScoreMap[player] = batsmanScoreMap[player]!!.plus(runsMap[runs]!!)
     } else {
-      batsmanScoreMap[player] = runs
+      batsmanScoreMap[player] = runsMap[runs]!!
     }
   }
 

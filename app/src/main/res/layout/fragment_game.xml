@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
@@ -22,7 +22,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="162dp"
     android:layout_marginStart="161dp"
-    android:layout_marginTop="24dp"
+    android:layout_marginTop="8dp"
     android:text="Bowl"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,6 @@
     android:layout_marginEnd="8dp"
     android:layout_marginTop="56dp"
     android:background="@color/colorAccent"
-    android:text="P1"
     android:textAppearance="@style/TextAppearance.AppCompat.Large"
     android:textColor="#fff"
     app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +48,6 @@
     android:layout_marginBottom="56dp"
     android:layout_marginEnd="8dp"
     android:background="@color/colorAccent"
-    android:text="P2"
     android:textAppearance="@style/TextAppearance.AppCompat.Large"
     android:textColor="#fff"
     app:layout_constraintBottom_toBottomOf="@+id/pitchImageView"
@@ -63,41 +61,55 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="24dp"
     android:layout_marginTop="8dp"
-    android:text="Runs :"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.71000004" />
+    app:layout_constraintVertical_bias="0.65999997" />
 
   <TextView
     android:id="@+id/wicketsTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="24dp"
-    android:text="Wickets :"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
     app:layout_constraintBaseline_toBaselineOf="@+id/runsTextView"
     app:layout_constraintStart_toEndOf="@+id/runsTextView" />
+
+  <TextView
+    android:id="@+id/strikerScoreTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+    app:layout_constraintStart_toStartOf="@+id/runsTextView"
+    app:layout_constraintTop_toBottomOf="@+id/runsTextView" />
+
+  <TextView
+    android:id="@+id/runnerScoreTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+    app:layout_constraintBaseline_toBaselineOf="@+id/strikerScoreTextView"
+    app:layout_constraintStart_toEndOf="@+id/strikerScoreTextView" />
 
   <TextView
     android:id="@+id/currentBallTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:text="Current Ball Result :"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintStart_toStartOf="@+id/runsTextView"
-    app:layout_constraintTop_toBottomOf="@+id/runsTextView" />
+    app:layout_constraintStart_toStartOf="@+id/strikerScoreTextView"
+    app:layout_constraintTop_toBottomOf="@+id/strikerScoreTextView" />
 
   <TextView
     android:id="@+id/oversTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:text="Overs : "
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
     app:layout_constraintStart_toStartOf="@+id/currentBallTextView"
     app:layout_constraintTop_toBottomOf="@+id/currentBallTextView" />
@@ -107,7 +119,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:text="Target : "
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
     app:layout_constraintStart_toStartOf="@+id/oversTextView"
     app:layout_constraintTop_toBottomOf="@+id/oversTextView" />
@@ -117,7 +128,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="24dp"
-    android:text="Required Runs : "
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
     app:layout_constraintBaseline_toBaselineOf="@+id/targetTextView"
     app:layout_constraintStart_toEndOf="@+id/targetTextView" />
@@ -127,9 +137,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:text="Bowler Name : "
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
     app:layout_constraintStart_toStartOf="@+id/targetTextView"
     app:layout_constraintTop_toBottomOf="@+id/targetTextView" />
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

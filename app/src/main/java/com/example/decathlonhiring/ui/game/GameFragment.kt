@@ -62,7 +62,7 @@ class GameFragment : Fragment(), GameView {
   }
 
   override fun updateOverCount(overCount: String) {
-    fragmentView.oversTextView.text = "Overs - $overCount"
+    fragmentView.oversTextView.text = "Overs: $overCount"
   }
 
   override fun updateCurrentDeliveryScore(score: String) {
@@ -93,6 +93,18 @@ class GameFragment : Fragment(), GameView {
       setMessage(runs)
       show()
     }
+  }
+
+  override fun updateStrikerScore(score: String) {
+    fragmentView.strikerScoreTextView.text = score
+  }
+
+  override fun updateRunnerScore(score: String) {
+    fragmentView.runnerScoreTextView.text = score
+  }
+
+  override fun showHalfCenturyAnimation(batsmanName: String) {
+
   }
 
   private fun attachClickListeners() {

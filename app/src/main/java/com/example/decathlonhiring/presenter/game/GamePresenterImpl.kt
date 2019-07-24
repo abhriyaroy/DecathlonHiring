@@ -14,6 +14,7 @@ class GamePresenterImpl(
   private var gameView: GameView? = null
   private var strikerName = ""
   private var runnerName = ""
+  private val celebrationsSet = hashSetOf<String>()
 
   override fun attachView(view: GameView) {
     gameView = view
@@ -35,6 +36,9 @@ class GamePresenterImpl(
     gameView?.updateRunsRequired(repository.getTargetScore().toString())
     gameView?.updateBowlerName(repository.getNextBowler())
     gameView?.updateWickets(0)
+    gameView?.updateStrikerScore("$strikerName (0)*")
+    gameView?.updateRunnerScore("$runnerName (0)")
+    gameView?.updateWickets(0)
   }
 
   override fun handleBowlClick() {
@@ -51,6 +55,7 @@ class GamePresenterImpl(
   }
 
   private fun processRun(run: Run) {
+    repository.incrementBatsmanScore(strikerName, run)
     if (run == ONE || run == THREE) {
       interchangeBatsmen()
     } else if (run == WICKET) {
@@ -65,6 +70,20 @@ class GamePresenterImpl(
   private fun updateView() {
     gameView?.updateScore(repository.getCurrentScore())
     gameView?.updateRunsRequired(repository.getRequiredRunsToWin().toString())
+    with(repository.getBatsmanScore(strikerName)) {
+      if (this >= 50 && !celebrationsSet.contains(strikerName)) {
+        celebrationsSet.add(strikerName)
+        gameView?.showHalfCenturyAnimation(strikerName)
+      }
+      gameView?.updateStrikerScore("$strikerName ($this)*`")
+    }
+    with(repository.getBatsmanScore(runnerName)) {
+      if (this >= 50 && !celebrationsSet.contains(runnerName)) {
+        celebrationsSet.add(runnerName)
+        gameView?.showHalfCenturyAnimation(runnerName)
+      }
+      gameView?.updateRunnerScore("$runnerName ($this)`")
+    }
   }
 
   private fun validateOver(over: Double) {
