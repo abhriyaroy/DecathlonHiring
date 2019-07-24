@@ -58,7 +58,7 @@ class GameFragment : Fragment(), GameView {
 
   override fun updateTargetScore(score: String) {
     fragmentView.targetTextView.text =
-      activity!!.stringRes(R.string.game_fragment_score_textView_message, score)
+      activity!!.stringRes(R.string.game_fragment_target_score_textView_message, score)
   }
 
   override fun updateStrikerName(name: String) {
