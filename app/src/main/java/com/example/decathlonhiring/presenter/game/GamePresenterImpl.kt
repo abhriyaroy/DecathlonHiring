@@ -7,6 +7,13 @@ import com.example.decathlonhiring.exceptions.OutOfBatsmenException
 import com.example.decathlonhiring.presenter.game.GameContract.GamePresenter
 import com.example.decathlonhiring.presenter.game.GameContract.GameView
 
+private const val INITIAL_SCORE = 0
+private const val INITIAL_OVER_COUNT = 0.0F
+private const val INITIAL_WICKETS_LOST = 0
+private const val HALF_CENTURY_SCORE = 50
+private const val OVER_COUNT_HELPER = 0.4
+private const val ONE_OVER_COUNT = 1.0
+
 class GamePresenterImpl(
   private val repository: Repository
 ) : GamePresenter {
@@ -27,18 +34,18 @@ class GamePresenterImpl(
   override fun decorateView() {
     strikerName = repository.getNextBatsman()
     runnerName = repository.getNextBatsman()
-    gameView?.updateScore(0)
+    gameView?.updateScore(INITIAL_SCORE)
     gameView?.updateTargetScore(repository.generateTargetScore())
     gameView?.updateStrikerName(strikerName)
     gameView?.updateRunnerName(runnerName)
-    gameView?.updateCurrentDeliveryScore("0")
-    gameView?.updateOverCount("0.0")
+    gameView?.updateCurrentDeliveryScore("$INITIAL_SCORE")
+    gameView?.updateOverCount("$INITIAL_OVER_COUNT")
     gameView?.updateRunsRequired(repository.getTargetScore().toString())
     gameView?.updateBowlerName(repository.getNextBowler())
-    gameView?.updateWickets(0)
-    gameView?.updateStrikerScore("$strikerName (0)*")
-    gameView?.updateRunnerScore("$runnerName (0)")
-    gameView?.updateWickets(0)
+    gameView?.updateWickets(INITIAL_WICKETS_LOST)
+    gameView?.updateStrikerScore("$strikerName ($INITIAL_OVER_COUNT)*")
+    gameView?.updateRunnerScore("$runnerName ($INITIAL_OVER_COUNT)")
+    gameView?.updateWickets(INITIAL_WICKETS_LOST)
   }
 
   override fun handleBowlClick() {
@@ -72,16 +79,16 @@ class GamePresenterImpl(
     gameView?.updateScore(repository.getCurrentScore())
     gameView?.updateRunsRequired(repository.getRequiredRunsToWin().toString())
     with(repository.getBatsmanScore(strikerName)) {
-      if (this >= 50 && !celebrationsSet.contains("$strikerName (50)*")) {
+      if (this >= HALF_CENTURY_SCORE && !celebrationsSet.contains("$strikerName ($HALF_CENTURY_SCORE)*")) {
         celebrationsSet.add(strikerName)
         gameView?.showHalfCenturyAnimation(strikerName)
       }
       gameView?.updateStrikerScore("$strikerName ($this)*")
     }
     with(repository.getBatsmanScore(runnerName)) {
-      if (this >= 50 && !celebrationsSet.contains(runnerName)) {
+      if (this >= HALF_CENTURY_SCORE && !celebrationsSet.contains(runnerName)) {
         celebrationsSet.add(runnerName)
-        gameView?.showHalfCenturyAnimation("$runnerName (50)*")
+        gameView?.showHalfCenturyAnimation("$runnerName ($HALF_CENTURY_SCORE)*")
       }
       gameView?.updateRunnerScore("$runnerName ($this)")
     }
@@ -89,12 +96,12 @@ class GamePresenterImpl(
 
   private fun validateOver(over: Double) {
     var updatedOver = over
-    if ((over + 0.4) % 1.0 == 0.0) {
-      if (over + 0.4 == 5.0) {
+    if ((over + OVER_COUNT_HELPER) % ONE_OVER_COUNT == 0.0) {
+      if (over + OVER_COUNT_HELPER == 5.0) {
         gameView?.showBowlingTeamWonMessage(getBowlingTeamWinningMessage())
         return
       }
-      updatedOver += 0.4
+      updatedOver += OVER_COUNT_HELPER
       repository.updateOverCount()
       gameView?.updateBowlerName(repository.getNextBowler())
     }
