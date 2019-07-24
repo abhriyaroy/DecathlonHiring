@@ -1,6 +1,6 @@
 package com.example.decathlonhiring.presenter.startgame
 
-import com.example.maticnetwork.presenter.BasePresenter
+import com.example.decathlonhiring.presenter.BasePresenter
 
 interface StartGameContract {
 

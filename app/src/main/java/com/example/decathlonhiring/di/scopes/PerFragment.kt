@@ -1,4 +1,4 @@
-package com.example.maticnetwork.di.scopes
+package com.example.decathlonhiring.di.scopes
 
 import javax.inject.Scope
 

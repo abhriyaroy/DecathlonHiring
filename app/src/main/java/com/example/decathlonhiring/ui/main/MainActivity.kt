@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.example.decathlonhiring.R
+import com.example.decathlonhiring.presenter.main.MainContract
+import com.example.decathlonhiring.presenter.main.MainContract.MainView
 import com.example.decathlonhiring.ui.startgame.StartGameFragment
-import com.example.maticnetwork.presenter.main.MainContract
-import com.example.maticnetwork.utils.showToast
-import com.example.maticnetwork.utils.stringRes
+import com.example.decathlonhiring.utils.showToast
+import com.example.decathlonhiring.utils.stringRes
 import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity(), MainContract.MainView {
+class MainActivity : DaggerAppCompatActivity(), MainView {
 
   @Inject
   internal lateinit var mainPresenter: MainContract.MainPresenter

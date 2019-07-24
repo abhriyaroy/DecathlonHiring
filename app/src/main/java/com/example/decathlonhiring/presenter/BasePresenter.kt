@@ -1,4 +1,4 @@
-package com.example.maticnetwork.presenter
+package com.example.decathlonhiring.presenter
 
 interface BasePresenter<T> {
   fun attachView(view: T)

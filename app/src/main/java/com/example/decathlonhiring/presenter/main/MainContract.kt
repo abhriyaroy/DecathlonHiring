@@ -1,6 +1,6 @@
-package com.example.maticnetwork.presenter.main
+package com.example.decathlonhiring.presenter.main
 
-import com.example.maticnetwork.presenter.BasePresenter
+import com.example.decathlonhiring.presenter.BasePresenter
 
 interface MainContract {
 

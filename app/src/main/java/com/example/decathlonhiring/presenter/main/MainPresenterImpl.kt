@@ -1,7 +1,7 @@
-package com.example.maticnetwork.presenter.main
+package com.example.decathlonhiring.presenter.main
 
-import com.example.maticnetwork.presenter.main.MainContract.MainPresenter
-import com.example.maticnetwork.presenter.main.MainContract.MainView
+import com.example.decathlonhiring.presenter.main.MainContract.MainPresenter
+import com.example.decathlonhiring.presenter.main.MainContract.MainView
 
 class MainPresenterImpl : MainPresenter {
   private var mainView: MainView? = null

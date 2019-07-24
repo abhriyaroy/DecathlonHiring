@@ -1,8 +1,8 @@
 package com.example.decathlonhiring.ui.main
 
-import com.example.maticnetwork.di.scopes.PerActivity
-import com.example.maticnetwork.presenter.main.MainContract
-import com.example.maticnetwork.presenter.main.MainPresenterImpl
+import com.example.decathlonhiring.di.scopes.PerActivity
+import com.example.decathlonhiring.presenter.main.MainContract
+import com.example.decathlonhiring.presenter.main.MainPresenterImpl
 import dagger.Module
 import dagger.Provides
 

@@ -75,14 +75,14 @@ class GamePresenterImpl(
         celebrationsSet.add(strikerName)
         gameView?.showHalfCenturyAnimation(strikerName)
       }
-      gameView?.updateStrikerScore("$strikerName ($this)*`")
+      gameView?.updateStrikerScore("$strikerName ($this)*")
     }
     with(repository.getBatsmanScore(runnerName)) {
       if (this >= 50 && !celebrationsSet.contains(runnerName)) {
         celebrationsSet.add(runnerName)
         gameView?.showHalfCenturyAnimation(runnerName)
       }
-      gameView?.updateRunnerScore("$runnerName ($this)`")
+      gameView?.updateRunnerScore("$runnerName ($this)")
     }
   }
 
@@ -118,14 +118,14 @@ class GamePresenterImpl(
   private fun getBowlingTeamWinningMessage(): String {
     val remainingRuns = repository.getRequiredRunsToWin()
     if (remainingRuns > 1) {
-      return "Bowling team won by $remainingRuns runs"
+      return "Bowling team win by $remainingRuns runs"
     } else {
-      return "Bowling team won by $remainingRuns run"
+      return "Bowling team win by $remainingRuns run"
     }
   }
 
   private fun getBattingTeamWinningMessage(): String {
     val playersLeft = repository.getRemainingBatsmenCount() + 1
-    return "Batting team won by ${playersLeft + 1} wickets"
+    return "Batting team win by ${playersLeft + 1} wickets"
   }
 }

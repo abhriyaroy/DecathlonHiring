@@ -10,7 +10,7 @@ import com.example.decathlonhiring.R
 import com.example.decathlonhiring.presenter.startgame.StartGameContract.StartGamePresenter
 import com.example.decathlonhiring.presenter.startgame.StartGameContract.StartGameView
 import com.example.decathlonhiring.ui.game.GameFragment
-import com.example.maticnetwork.utils.showToast
+import com.example.decathlonhiring.utils.showToast
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_start_game.view.*
 import javax.inject.Inject

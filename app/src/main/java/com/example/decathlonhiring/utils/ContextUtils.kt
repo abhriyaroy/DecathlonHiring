@@ -1,4 +1,4 @@
-package com.example.maticnetwork.utils
+package com.example.decathlonhiring.utils
 
 import android.content.Context
 import android.widget.Toast
