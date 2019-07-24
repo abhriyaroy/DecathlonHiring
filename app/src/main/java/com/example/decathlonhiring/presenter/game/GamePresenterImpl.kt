@@ -39,7 +39,6 @@ class GamePresenterImpl(
     gameView?.updateStrikerScore("$strikerName (0)*")
     gameView?.updateRunnerScore("$runnerName (0)")
     gameView?.updateWickets(0)
-    gameView?.showHalfCenturyAnimation("$strikerName (50)*")
   }
 
   override fun handleBowlClick() {

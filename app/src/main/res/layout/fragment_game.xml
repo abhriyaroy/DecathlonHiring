@@ -59,44 +59,52 @@
 
   <TextView
     android:id="@+id/runsTextView"
-    android:layout_width="wrap_content"
+    android:layout_width="70dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
     android:layout_marginTop="8dp"
+    android:layout_marginRight="8dp"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintEnd_toStartOf="@+id/wicketsTextView"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintHorizontal_chainStyle="packed"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.65999997" />
+    app:layout_constraintTop_toBottomOf="@+id/bowlButton" />
 
   <TextView
     android:id="@+id/wicketsTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
+    android:layout_marginLeft="8dp"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintBaseline_toBaselineOf="@+id/runsTextView"
+    app:layout_constraintBaseline_toBaselineOf="@id/runsTextView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toEndOf="@+id/runsTextView" />
 
   <TextView
     android:id="@+id/strikerScoreTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintStart_toStartOf="@+id/runsTextView"
+    app:layout_constraintEnd_toStartOf="@+id/runnerScoreTextView"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintHorizontal_chainStyle="packed"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/runsTextView" />
 
   <TextView
     android:id="@+id/runnerScoreTextView"
-    android:layout_width="wrap_content"
+    android:layout_width="65dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintBaseline_toBaselineOf="@+id/strikerScoreTextView"
-    app:layout_constraintStart_toEndOf="@+id/strikerScoreTextView" />
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/strikerScoreTextView"
+    app:layout_constraintTop_toBottomOf="@+id/runsTextView" />
 
   <TextView
     android:id="@+id/currentBallTextView"
@@ -104,7 +112,9 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintStart_toStartOf="@+id/strikerScoreTextView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/strikerScoreTextView" />
 
   <TextView
@@ -113,26 +123,35 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintStart_toStartOf="@+id/currentBallTextView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/currentBallTextView" />
 
   <TextView
     android:id="@+id/targetTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintStart_toStartOf="@+id/oversTextView"
+    app:layout_constraintEnd_toStartOf="@+id/requiredRunsTextView"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintHorizontal_chainStyle="packed"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/oversTextView" />
 
   <TextView
     android:id="@+id/requiredRunsTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="8dp"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintBaseline_toBaselineOf="@+id/targetTextView"
-    app:layout_constraintStart_toEndOf="@+id/targetTextView" />
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/targetTextView"
+    app:layout_constraintTop_toBottomOf="@+id/oversTextView" />
 
   <TextView
     android:id="@+id/bowlerNameTextView"
@@ -140,7 +159,9 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintStart_toStartOf="@+id/targetTextView"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/targetTextView" />
 
   <TextView
