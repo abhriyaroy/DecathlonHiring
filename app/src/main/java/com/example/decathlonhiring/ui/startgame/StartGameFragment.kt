@@ -11,6 +11,7 @@ import com.example.decathlonhiring.presenter.startgame.StartGameContract.StartGa
 import com.example.decathlonhiring.presenter.startgame.StartGameContract.StartGameView
 import com.example.decathlonhiring.ui.game.GameFragment
 import com.example.decathlonhiring.utils.showToast
+import com.example.decathlonhiring.utils.stringRes
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_start_game.view.*
 import javax.inject.Inject
@@ -46,7 +47,7 @@ class StartGameFragment : Fragment(), StartGameView {
   }
 
   override fun showAllTheBestMessage() {
-    context?.showToast(getString(R.string.start_game_fragment_all_the_best_message))
+    context?.showToast(context!!.stringRes(R.string.start_game_fragment_all_the_best_message))
   }
 
   private fun initClickListeners(view: View) {
