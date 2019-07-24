@@ -185,7 +185,6 @@ class RepositoryImpl : Repository {
   }
 
   private fun getRandomBowler(): String {
-    println(bowlersList.toString())
     var randomValue = 0
     if (bowlersList.size != 1) {
       randomValue = Random().nextInt(bowlersList.size - 1)
