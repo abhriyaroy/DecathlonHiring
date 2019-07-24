@@ -78,21 +78,24 @@ class GameFragment : Fragment(), GameView {
   }
 
   override fun updateCurrentDeliveryScore(score: String) {
-    fragmentView.currentBallTextView.text = "Current ball run: $score"
+    fragmentView.currentBallTextView.text =
+      activity!!.stringRes(R.string.game_fragment_current_ball_textView_message, score)
   }
 
   override fun updateBowlerName(name: String) {
-    fragmentView.bowlerNameTextView.text = "Bowler: $name"
+    fragmentView.bowlerNameTextView.text =
+      activity!!.stringRes(R.string.game_fragment_bowler_name_textView_message, name)
   }
 
   override fun updateWickets(wicketsLost: Int) {
-    fragmentView.wicketsTextView.text = "Wickets Lost: $wicketsLost"
+    fragmentView.wicketsTextView.text =
+      activity!!.stringRes(R.string.game_fragment_bowler_name_textView_message, wicketsLost)
   }
 
   override fun showBattingTeamWonMessage(wickets: String) {
     with(AlertDialog.Builder(activity)) {
       setCancelable(false)
-      setTitle("Match Result")
+      setTitle(activity!!.stringRes(R.string.game_fragment_match_result_dialog_title))
       setMessage(wickets)
       show()
     }
@@ -101,7 +104,7 @@ class GameFragment : Fragment(), GameView {
   override fun showBowlingTeamWonMessage(runs: String) {
     with(AlertDialog.Builder(activity)) {
       setCancelable(false)
-      setTitle("Match Result")
+      setTitle(activity!!.stringRes(R.string.game_fragment_match_result_dialog_title))
       setMessage(runs)
       show()
     }

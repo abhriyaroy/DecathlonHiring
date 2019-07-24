@@ -14,4 +14,8 @@
   <string name="game_fragment_target_score_textView_message">Target: %$1s</string>
   <string name="game_fragment_runs_required_textView_message">Runs Required: %$1s</string>
   <string name="game_fragment_over_count_textView_message">Overs: %$1s</string>
+  <string name="game_fragment_current_ball_textView_message">Current ball run: %$1s</string>
+  <string name="game_fragment_bowler_name_textView_message">Bowler: %$1s</string>
+  <string name="game_fragment_wickets_lost_textView_message">Wickets Lost: %$1d</string>
+  <string name="game_fragment_match_result_dialog_title">Match Result</string>
 </resources>
