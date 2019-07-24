@@ -5,7 +5,7 @@ import com.example.maticnetwork.presenter.BasePresenter
 interface GameContract {
 
   interface GameView {
-    fun updateScore(score : Int)
+    fun updateScore(score: Int)
     fun updateTargetScore(score: String)
     fun updateStrikerName(name: String)
     fun updateRunnerName(name: String)
@@ -13,7 +13,7 @@ interface GameContract {
     fun updateCurrentDeliveryScore(score: String)
     fun updateOverCount(overCount: String)
     fun updateRunsRequired(runsRequired: String)
-    fun updateWickets(wicketsLost : Int)
+    fun updateWickets(wicketsLost: Int)
     fun showBattingTeamWonMessage(wickets: String)
     fun showBowlingTeamWonMessage(runs: String)
   }
