@@ -17,4 +17,13 @@
   <dimen name="game_fragment_striker_score_text_margin_top">8dp</dimen>
   <dimen name="game_fragment_runner_score_text_margin_left">8dp</dimen>
   <dimen name="game_fragment_runner_score_text_margin_top">8dp</dimen>
+  <dimen name="game_fragment_current_ball_text_margin_top">8dp</dimen>
+  <dimen name="game_fragment_overs_text_margin_top">8dp</dimen>
+  <dimen name="game_fragment_target_text_margin_right">8dp</dimen>
+  <dimen name="game_fragment_target_text_margin_top">8dp</dimen>
+  <dimen name="game_fragment_required_runs_text_margin_left">8dp</dimen>
+  <dimen name="game_fragment_required_runs_text_margin_top">8dp</dimen>
+  <dimen name="game_fragment_bowler_name_text_margin_top">8dp</dimen>
+  <dimen name="game_fragment_half_century_celebrations_text_margin_bottom">8dp</dimen>
+  <dimen name="game_fragment_half_century_celebrations_text_margin_start">8dp</dimen>
 </resources>
