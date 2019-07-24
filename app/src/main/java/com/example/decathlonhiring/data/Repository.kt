@@ -11,7 +11,11 @@ import java.util.*
  * Thus normal data types have been used.
  */
 interface Repository {
+  fun generateTargetScore(): String
   fun getTargetScore(): Int
+  fun getCurrentScore(): Int
+  fun getCurrentDeliveryScore(): Int
+  fun getRequiredRunsToWin(): Int
 
   @Throws(OutOfBatsmenException::class)
   fun getNextBatsman(): String
@@ -34,6 +38,10 @@ const val highestScorePossible = 90
 
 class RepositoryImpl : Repository {
 
+  private var targetScore: Int = 0
+  private var currentScore: Int = 0
+  private var currentDeliveryScore: Int = 0
+  private var requiredRuns: Int = 0
   private val batsmanStack = Stack<String>()
   private val bowlersList = arrayListOf(
     Pair(1, "B1"),
@@ -65,8 +73,25 @@ class RepositoryImpl : Repository {
     batsmanStack.push("P1")
   }
 
+  override fun generateTargetScore(): String {
+    targetScore = Random().nextInt(highestScorePossible - lowestScorePossible) + lowestScorePossible
+    return targetScore.toString()
+  }
+
   override fun getTargetScore(): Int {
-    return Random().nextInt(highestScorePossible - lowestScorePossible) + lowestScorePossible
+    return targetScore
+  }
+
+  override fun getCurrentDeliveryScore(): Int {
+    return currentDeliveryScore
+  }
+
+  override fun getCurrentScore(): Int {
+    return currentScore
+  }
+
+  override fun getRequiredRunsToWin(): Int {
+    return targetScore - currentScore
   }
 
   @Throws(OutOfBatsmenException::class)
@@ -111,7 +136,8 @@ class RepositoryImpl : Repository {
       5 -> WICKET
       else -> NO_BALL
     }
-    runsConceeded += runsMap[run]!!
+    currentDeliveryScore = runsMap[run]!!
+    runsConceeded += currentDeliveryScore
     return run
   }
 
@@ -122,7 +148,8 @@ class RepositoryImpl : Repository {
   }
 
   override fun getRunValue(run: Run): Int {
-    return runsMap[run]!!
+    currentDeliveryScore = runsMap[run]!!
+    return currentScore
   }
 
   override fun getRemainingBatsmenCount(): Int {

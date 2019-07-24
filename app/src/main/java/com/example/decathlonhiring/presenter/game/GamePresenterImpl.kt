@@ -12,10 +12,6 @@ class GamePresenterImpl(
 ) : GamePresenter {
 
   private var gameView: GameView? = null
-  private var targetScore: Int = 0
-  private var currentScore: Int = 0
-  private var currentDeliveryScore: Int = 0
-  private var requiredRuns: Int = 0
   private var strikerName = ""
   private var runnerName = ""
 
@@ -30,14 +26,13 @@ class GamePresenterImpl(
   override fun decorateView() {
     strikerName = repository.getNextBatsman()
     runnerName = repository.getNextBatsman()
-    targetScore = repository.getTargetScore()
     gameView?.updateScore(0)
-    gameView?.updateTargetScore(targetScore.toString())
+    gameView?.updateTargetScore(repository.generateTargetScore())
     gameView?.updateStrikerName(strikerName)
     gameView?.updateRunnerName(runnerName)
     gameView?.updateCurrentDeliveryScore("0")
     gameView?.updateOverCount("0.0")
-    gameView?.updateRunsRequired(targetScore.toString())
+    gameView?.updateRunsRequired(repository.getTargetScore().toString())
     gameView?.updateBowlerName(repository.getNextBowler())
     gameView?.updateWickets(0)
   }
@@ -47,11 +42,8 @@ class GamePresenterImpl(
     try {
       val run = repository.getRunForDelivery()
       processRun(run)
-      currentDeliveryScore = repository.getRunValue(run)
-      currentScore += currentDeliveryScore
-      requiredRuns = targetScore - currentScore
     } catch (e: OutOfBatsmenException) {
-      gameView?.showBowlingTeamWonMessage(getBowlingTeamWinningMessage(over))
+      gameView?.showBowlingTeamWonMessage(getBowlingTeamWinningMessage())
     }
     updateView()
     checkIfBattingTeamHasWon()
@@ -59,27 +51,27 @@ class GamePresenterImpl(
   }
 
   private fun updateView() {
-    gameView?.updateScore(currentScore)
-    gameView?.updateRunsRequired(requiredRuns.toString())
+    gameView?.updateScore(repository.getCurrentScore())
+    gameView?.updateRunsRequired(repository.getRequiredRunsToWin().toString())
   }
 
   private fun validateOver(over: Double) {
     var updatedOver = over
     if ((over + 0.4) % 1.0 == 0.0) {
       if (over + 0.4 == 5.0) {
-        gameView?.showBowlingTeamWonMessage(getBowlingTeamWinningMessage(over))
+        gameView?.showBowlingTeamWonMessage(getBowlingTeamWinningMessage())
         return
       }
       updatedOver += 0.4
       repository.updateOverCount()
       gameView?.updateBowlerName(repository.getNextBowler())
     }
-    gameView?.updateCurrentDeliveryScore(currentDeliveryScore.toString())
+    gameView?.updateCurrentDeliveryScore(repository.getCurrentDeliveryScore().toString())
     gameView?.updateOverCount(updatedOver.toString())
   }
 
   private fun checkIfBattingTeamHasWon() {
-    if (requiredRuns <= 0) {
+    if (repository.getCurrentDeliveryScore() <= 0) {
       gameView?.showBattingTeamWonMessage(getBattingTeamWinningMessage())
     }
   }
@@ -105,15 +97,12 @@ class GamePresenterImpl(
     strikerName = temp
   }
 
-  private fun getBowlingTeamWinningMessage(over: Double): String {
-    val ballsLeftInCurrentOver = repository.getRemainingBallsInCurrentOverCount()
-    val oversLeft = repository.getRemainingOversCount()
-    if (ballsLeftInCurrentOver > 1)
-      return "Bowling team won by $oversLeft.$ballsLeftInCurrentOver overs"
-    else if (oversLeft == 1) {
-      return "Bowling team won by $oversLeft over"
+  private fun getBowlingTeamWinningMessage(): String {
+    val remainingRuns = repository.getRequiredRunsToWin()
+    if (remainingRuns > 1) {
+      return "Bowling team won by $remainingRuns runs"
     } else {
-      return "Bowling team won by $oversLeft overs"
+      return "Bowling team won by $remainingRuns run"
     }
   }
 
