@@ -11,6 +11,10 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
+
+/**
+ * I could not write tests for the other classes due to the limited amount of time, for which, I apologize.
+ */
 @RunWith(MockitoJUnitRunner::class)
 class StartGamePresenterTest {
 
