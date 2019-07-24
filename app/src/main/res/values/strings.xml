@@ -10,4 +10,8 @@
   <string name="game_fragment_bowling_team_wins_by_one_run_message">Bowling team wins by %1$d run</string>
   <string name="game_fragment_bowling_team_wins_by_more_than_one_run_message">Bowling team wins by %1$d runs</string>
   <string name="game_fragment_batting_team_wins_message">Batting team wins by %1$d wickets</string>
+  <string name="game_fragment_score_textView_message">Runs : %$1d</string>
+  <string name="game_fragment_target_score_textView_message">Target: %$1s</string>
+  <string name="game_fragment_runs_required_textView_message">Runs Required: %$1s</string>
+  <string name="game_fragment_over_count_textView_message">Overs: %$1s</string>
 </resources>

@@ -16,3 +16,7 @@ fun Context.stringRes(@StringRes stringResource: Int): String {
 fun Context.stringRes(@StringRes stringResource: Int, argument: Int): String {
   return getString(stringResource, argument)
 }
+
+fun Context.stringRes(@StringRes stringResource: Int, argument: String): String {
+  return getString(stringResource, argument)
+}

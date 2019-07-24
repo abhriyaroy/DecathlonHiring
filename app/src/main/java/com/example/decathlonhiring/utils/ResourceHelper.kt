@@ -14,6 +14,6 @@ class ResourceHelperImpl(private val context: Context) : ResourceHelper {
   }
 
   override fun getStringResource(id: Int, argument: Int): String {
-    return context.getString(id, argument)
+    return context.stringRes(id, argument)
   }
 }

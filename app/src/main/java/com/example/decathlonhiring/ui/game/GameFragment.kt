@@ -13,6 +13,7 @@ import com.example.decathlonhiring.R
 import com.example.decathlonhiring.presenter.game.GameContract.GamePresenter
 import com.example.decathlonhiring.presenter.game.GameContract.GameView
 import com.example.decathlonhiring.utils.AnimationUtil
+import com.example.decathlonhiring.utils.stringRes
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_game.view.*
 import javax.inject.Inject
@@ -49,11 +50,13 @@ class GameFragment : Fragment(), GameView {
   }
 
   override fun updateScore(score: Int) {
-    fragmentView.runsTextView.text = "Runs : $score"
+    fragmentView.runsTextView.text =
+      activity!!.stringRes(R.string.game_fragment_score_textView_message, score)
   }
 
   override fun updateTargetScore(score: String) {
-    fragmentView.targetTextView.text = "Target: $score"
+    fragmentView.targetTextView.text =
+      activity!!.stringRes(R.string.game_fragment_score_textView_message, score)
   }
 
   override fun updateStrikerName(name: String) {
@@ -65,11 +68,13 @@ class GameFragment : Fragment(), GameView {
   }
 
   override fun updateRunsRequired(runsRequired: String) {
-    fragmentView.requiredRunsTextView.text = "Runs Required: $runsRequired"
+    fragmentView.requiredRunsTextView.text =
+      activity!!.stringRes(R.string.game_fragment_runs_required_textView_message, runsRequired)
   }
 
   override fun updateOverCount(overCount: String) {
-    fragmentView.oversTextView.text = "Overs: $overCount"
+    fragmentView.oversTextView.text =
+      activity!!.stringRes(R.string.game_fragment_over_count_textView_message, overCount)
   }
 
   override fun updateCurrentDeliveryScore(score: String) {
