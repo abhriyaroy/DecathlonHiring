@@ -1,12 +1,11 @@
 package com.example.decathlonhiring.di
 
+import com.example.decathlonhiring.di.scopes.PerFragment
 import com.example.decathlonhiring.ui.game.GameFragment
 import com.example.decathlonhiring.ui.game.GameModule
 import com.example.decathlonhiring.ui.startgame.StartGameFragment
 import com.example.decathlonhiring.ui.startgame.StartGameModule
-import com.example.decathlonhiring.di.scopes.PerFragment
 import dagger.Module
-
 import dagger.android.ContributesAndroidInjector
 
 @Module
