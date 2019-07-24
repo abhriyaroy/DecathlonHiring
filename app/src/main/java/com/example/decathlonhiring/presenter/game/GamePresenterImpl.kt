@@ -57,6 +57,7 @@ class GamePresenterImpl(
   private fun processRun(run: Run) {
     repository.incrementBatsmanScore(strikerName, run)
     if (run == ONE || run == THREE) {
+      gameView?.animateBatsmen()
       interchangeBatsmen()
     } else if (run == WICKET) {
       gameView?.updateWickets(repository.getWicketsLost())

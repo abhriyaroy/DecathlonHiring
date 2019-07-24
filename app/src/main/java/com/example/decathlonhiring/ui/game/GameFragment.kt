@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
 import androidx.fragment.app.Fragment
 import com.example.decathlonhiring.R
 import com.example.decathlonhiring.presenter.game.GameContract.GamePresenter
@@ -39,6 +41,10 @@ class GameFragment : Fragment(), GameView {
   override fun onDestroy() {
     gamePresenter.detachView()
     super.onDestroy()
+  }
+
+  override fun animateBatsmen() {
+    fragmentView.motionContainer.transitionToEnd()
   }
 
   override fun updateScore(score: Int) {
@@ -111,6 +117,17 @@ class GameFragment : Fragment(), GameView {
     fragmentView.bowlButton.setOnClickListener {
       gamePresenter.handleBowlClick()
     }
+    fragmentView.motionContainer.setTransitionListener(
+      object : TransitionListener {
+        override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+          // Do nothing
+        }
+
+        override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+          fragmentView.motionContainer.progress = 0.0f
+        }
+      }
+    )
   }
 
 }

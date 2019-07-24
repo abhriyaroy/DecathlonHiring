@@ -7,6 +7,7 @@ interface GameContract {
   interface GameView {
     fun updateScore(score: Int)
     fun updateTargetScore(score: String)
+    fun animateBatsmen()
     fun updateStrikerName(name: String)
     fun updateRunnerName(name: String)
     fun updateBowlerName(name: String)
