@@ -13,6 +13,10 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
+
+/**
+ * I could not write tests for the other classes due to the limited amount of time, for which, I apologize.
+ */
 @RunWith(MockitoJUnitRunner::class)
 class MainPresenterTest {
 
@@ -53,7 +57,7 @@ class MainPresenterTest {
   @Test
   fun `should show exit app on handleBackPress call success on when exit confirmation is shown`() {
     mainPresenter.isExitConfirmationShown = true
-    
+
     mainPresenter.handleBackPress()
 
     assertTrue(mainPresenter.isExitConfirmationShown)
